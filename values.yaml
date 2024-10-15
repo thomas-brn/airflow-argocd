@@ -1,0 +1,25 @@
+# Configuration générale d'Airflow
+executor: CeleryExecutor
+airflowVersion: 2.3.0
+airflowCfg:
+  AIRFLOW__CORE__EXECUTOR: CeleryExecutor
+
+# Configuration de la base de données PostgreSQL
+postgresql:
+  enabled: false  # Désactiver la base de données PostgreSQL intégrée
+
+# Utiliser une base de données externe
+externalDatabase:
+  type: postgresql
+  host: airflow-postgres.postgres-operator.svc.cluster.local
+  port: 5432
+  database: airflow
+  user: airflow
+  passwordSecret: airflow-postgres-credentials  # Secret Kubernetes contenant le mot de passe
+
+# Configurer le webserver d'Airflow
+web:
+  defaultUser:
+    enabled: true
+    username: admin
+    password: admin
